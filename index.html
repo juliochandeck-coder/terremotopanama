@@ -6,6 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3C%3Fxml version=%221.0%22 encoding=%22UTF-8%22%3F%3E%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 xmlns:xlink=%22http://www.w3.org/1999/xlink%22 width=%22450%22 height=%22300%22 viewBox=%220 0 36 24%22%3E%3Crect width=%2236%22 height=%2224%22 fill=%22%23fff%22/%3E%3Cg fill=%22%23005293%22%3E%3Cg id=%22star%22 transform=%22translate(9,6)%22%3E%3Cg id=%22c%22%3E%3Cpath id=%22t%22 d=%22M 0,-3 v 3 h 1.5 z%22 transform=%22rotate(18 0,-3)%22/%3E%3Cuse xlink:href=%22%23t%22 transform=%22scale(-1,1)%22/%3E%3C/g%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(72)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(144)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(216)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(288)%22/%3E%3C/g%3E%3Crect y=%2212%22 width=%2218%22 height=%2212%22/%3E%3C/g%3E%3Cg fill=%22%23d21034%22%3E%3Crect x=%2218%22 width=%2218%22 height=%2212%22/%3E%3Cuse xlink:href=%22%23star%22 x=%2218%22 y=%2212%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap">
+<script>(function(){try{var t=localStorage.getItem('tp-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();</script>
 <style>
 /* Layout: columna única tipo story extendida — kicker azul, título light + bloque rojo, tarjetas blancas con filo azul, skyline al pie */
 :root{
@@ -454,6 +455,39 @@ details.cgroup>summary{display:flex;align-items:center;justify-content:space-bet
 details.cgroup>summary h3{margin:0;font-size:18px}
 details.cgroup[open]>summary{margin-bottom:12px}
 #alist{margin-top:20px}
+
+/* ===== Tema: original (claro) y modo oscuro ===== */
+.thm{flex:none;display:inline-flex;align-items:center;gap:8px;font:700 12px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:transparent;border:1.5px solid var(--blue);border-radius:999px;padding:8px 12px;cursor:pointer}
+.thm svg{width:16px;height:16px;fill:currentColor}
+.thm .t-d{display:none}
+:root[data-theme="dark"] .thm .t-l{display:none}
+:root[data-theme="dark"] .thm .t-d{display:inline}
+@media (max-width:760px){.thm{padding:8px 10px}.thm span{display:none}}
+:root[data-theme="dark"]{
+  --bg:#0E141B;--card:#17202B;--ink:#EDF0F4;--mute:#A9B3C0;
+  --blue:#5B9CEB;--navy:#0A1B2E;--red:#EE3F5B;--blush:#3A2229;--line:#2A3542;
+  --ok:#5FD39A;--okbg:#16352A;--warn:#F2C25B;--warnbg:#3A2F14;
+  --h0:#2A3542;--h1:#2E4A72;--h2:#4C7DBD;--h3:#C95A6D;--h4:#EE3F5B;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+:root[data-theme="dark"] .top,:root[data-theme="dark"] .top nav.tabs{background:rgba(14,20,27,.96)}
+@media (max-width:760px){:root[data-theme="dark"] .top{background:var(--bg)}:root[data-theme="dark"] .tabs{background:var(--card)}}
+:root[data-theme="dark"] .byline img{filter:invert(1)}
+:root[data-theme="dark"] .byline span{color:var(--ink)}
+:root[data-theme="dark"] .sky{filter:invert(1) hue-rotate(180deg);mix-blend-mode:screen}
+:root[data-theme="dark"] .skywrap{background:var(--bg)}
+:root[data-theme="dark"] .tab[aria-current="page"],:root[data-theme="dark"] .top nav.tabs a.tab[aria-current="page"]{color:#08111B}
+@media (max-width:760px){:root[data-theme="dark"] .tab[aria-current="page"],:root[data-theme="dark"] .top nav.tabs a.tab[aria-current="page"]{color:var(--red);background:transparent}}
+:root[data-theme="dark"] .cta,:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .copy.done,:root[data-theme="dark"] th{color:#08111B}
+:root[data-theme="dark"] .ico svg{fill:#08111B}
+:root[data-theme="dark"] .pchip[aria-selected="true"]{background:var(--blue);color:#08111B}
+:root[data-theme="dark"] .call911,:root[data-theme="dark"] .alert .ex,:root[data-theme="dark"] .lv-risk .ex,:root[data-theme="dark"] .avisos-link .ex,:root[data-theme="dark"] .avd .ex{color:#fff}
+:root[data-theme="dark"] .mmi{color:#fff}
+:root[data-theme="dark"] .alert,:root[data-theme="dark"] .lv-risk,:root[data-theme="dark"] .avisos-link{background:#0A1B2E;border:1px solid var(--line)}
+:root[data-theme="dark"] .footband{background:#0A1B2E}
+:root[data-theme="dark"] #pamap .rg{stroke:#0E141B}
+:root[data-theme="dark"] input,:root[data-theme="dark"] select{color:var(--ink);background:var(--card)}
 </style>
 </head><body>
 
@@ -480,7 +514,7 @@ details.cgroup[open]>summary{margin-bottom:12px}
 </g>
 </svg><span>Terremoto<br><b>Panamá</b></span></a>
     <nav class="tabs" aria-label="Secciones"><a class="tab" href="#inicio" data-v="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3z"/></svg><span>Inicio</span></a><a class="tab" href="#mapa" data-v="mapa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2zm0 2.2 6 2v11.6l-6-2z"/></svg><span>Mapa</span></a><a class="tab" href="#vivo" data-v="vivo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h4l2-6 4 12 3-9 2 3h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg><span>En vivo</span></a><a class="tab" href="#llamar" data-v="llamar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>Llamar</span></a><a class="tab" href="#donar" data-v="donar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.3-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.7-8 11-8 11z"/></svg><span>Donar</span></a></nav>
-    <a class="call911" href="tel:911">911</a>
+    <button class="thm" id="thm" type="button" aria-label="Cambiar entre modo original y modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><span><b class="t-l">Modo oscuro</b><b class="t-d">Modo original</b></span></button><a class="call911" href="tel:911">911</a>
   </div>
 </header>
 
@@ -715,6 +749,23 @@ window.drawLive=function(){
   })();
 };
 drawLive();
+
+/* ---- Cambiar tema ---- */
+(function(){
+  var b=document.getElementById('thm'); if(!b) return;
+  var root=document.documentElement;
+  function sync(){var d=root.getAttribute('data-theme')==='dark';b.setAttribute('aria-pressed',d?'true':'false');
+    var l=b.querySelectorAll('.t-l'),dk=b.querySelectorAll('.t-d');
+    l.forEach(function(e){e.style.display=d?'none':''});dk.forEach(function(e){e.style.display=d?'inline':'none'})}
+  b.addEventListener('click',function(){
+    var d=root.getAttribute('data-theme')==='dark';
+    if(d) root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark');
+    try{ if(d) localStorage.removeItem('tp-theme'); else localStorage.setItem('tp-theme','dark'); }catch(e){}
+    sync();
+  });
+  sync();
+})();
+
 /* ---- Actualización en vivo desde el navegador (USGS + Open-Meteo), cada 5 min ---- */
 (function(){
   const CO={'Tonosí':[7.41,-80.44],'Las Tablas':[7.766,-80.274],'Chitré':[7.961,-80.429],'Los Pozos':[7.78,-80.65],'Penonomé':[8.519,-80.357],'Santiago':[8.1,-80.983],'Soná':[8.008,-81.32],'Mariato':[7.66,-80.89]};
