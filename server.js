@@ -21,7 +21,7 @@ http.createServer(async(req,res)=>{
   if(u==='/api/igc'){
     try{
       const c=await igc();
-      res.writeHead(200,{'content-type':'text/html; charset=utf-8','cache-control':'no-store','x-igc-checked':new Date(cache.ok).toISOString()});
+      res.writeHead(200,{'access-control-allow-origin':'*','content-type':'text/html; charset=utf-8','cache-control':'no-store','x-igc-checked':new Date(cache.ok).toISOString()});
       return res.end(c.body);
     }catch(e){res.writeHead(502,{'cache-control':'no-store'});return res.end('igc no disponible')}
   }
