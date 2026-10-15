@@ -656,7 +656,7 @@ details.cgroup[open]>summary{margin-bottom:12px}
 <script>
 
 /* ---- Datos en vivo (bloque #live, lo reescribe la tarea programada) ---- */
-(function(){
+window.drawLive=function(){
   let L; try{L=JSON.parse(document.getElementById('live').textContent)}catch(e){return}
   const tz={timeZone:'America/Panama'};
   const fT=iso=>new Date(iso).toLocaleString('es-PA',{...tz,weekday:'short',day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
@@ -715,7 +715,49 @@ details.cgroup[open]>summary{margin-bottom:12px}
       (wetN.length?`<p class="rk">Alta probabilidad de lluvia en ${wetN.map(x=>x.lugar).join(', ')}. Ojo con deslizamientos.</p>`:'<p class="mini">Sin lluvia fuerte prevista en los próximos días.</p>')+
       `<a class="more-l" href="#vivo" data-v="vivo">Ver pronóstico completo</a>`;
   })();
+};
+drawLive();
+/* ---- Actualización en vivo desde el navegador (USGS + Open-Meteo), cada 5 min ---- */
+(function(){
+  const CO={'Tonosí':[7.41,-80.44],'Las Tablas':[7.766,-80.274],'Chitré':[7.961,-80.429],'Los Pozos':[7.78,-80.65],'Penonomé':[8.519,-80.357],'Santiago':[8.1,-80.983],'Soná':[8.008,-81.32],'Mariato':[7.66,-80.89]};
+  const WX={0:['sun','Despejado'],1:['sun','Mayormente despejado'],2:['partly_cloudy','Parcialmente nublado'],3:['cloudy','Nublado'],45:['cloudy','Niebla'],48:['cloudy','Niebla'],51:['drizzle','Llovizna ligera'],53:['drizzle','Llovizna'],55:['drizzle','Llovizna fuerte'],56:['drizzle','Llovizna helada'],57:['drizzle','Llovizna helada'],61:['rain','Lluvia ligera'],63:['rain','Lluvia'],65:['rain','Lluvia fuerte'],66:['rain','Lluvia helada'],67:['rain','Lluvia helada'],80:['rain','Chubascos ligeros'],81:['rain','Chubascos'],82:['rain','Chubascos fuertes'],95:['rain','Tormenta'],96:['rain','Tormenta con granizo'],99:['rain','Tormenta con granizo']};
+  const fetchJ=async u=>{const c=new AbortController();const t=setTimeout(()=>c.abort(),12000);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw 0;return await r.json()}finally{clearTimeout(t)}};
+  async function refresh(){
+    let L; try{L=JSON.parse(document.getElementById('live').textContent)}catch(e){return}
+    let okU=false,okW=false;
+    try{
+      const j=await fetchJ('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2026-10-09T17:00:00&minlatitude=5.5&maxlatitude=10&minlongitude=-84&maxlongitude=-77&orderby=time&limit=1000');
+      const f=j.features||[]; const main=f.filter(e=>e.properties.mag>=7), ev=f.filter(e=>e.properties.mag<7);
+      if(ev.length){
+        const U=L.sismo.usgs; U.total=ev.length; U.m5=ev.filter(e=>e.properties.mag>=5).length; U.m6=ev.filter(e=>e.properties.mag>=6).length; U.mayor=Math.max(...ev.map(e=>e.properties.mag)); U.corte=new Date().toISOString();
+        if(main.length) U.mag=Math.max(...main.map(e=>e.properties.mag));
+        const newest=Math.max(...L.sismo.recientes.map(e=>+new Date(e.t)));
+        const add=ev.filter(e=>e.properties.time>newest+6e4).map(e=>({t:new Date(e.properties.time).toISOString(),m:Math.round(e.properties.mag*10)/10,lugar:String(e.properties.place||'Panamá')+' (USGS)',p:Math.round(e.geometry.coordinates[2])}));
+        L.sismo.recientes=[...add,...L.sismo.recientes].sort((a,b)=>new Date(b.t)-new Date(a.t)).slice(0,7);
+        okU=true;
+      }
+    }catch(e){}
+    try{
+      const names=L.clima.map(c=>c.lugar).filter(n=>CO[n]);
+      if(names.length){
+        const u='https://api.open-meteo.com/v1/forecast?latitude='+names.map(n=>CO[n][0]).join(',')+'&longitude='+names.map(n=>CO[n][1]).join(',')+'&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=America%2FPanama&forecast_days=4';
+        let j=await fetchJ(u); if(!Array.isArray(j)) j=[j];
+        names.forEach((n,i)=>{const o=j[i],c=L.clima.find(x=>x.lugar===n); if(!o||!o.current||!c)return;
+          const w=WX[o.current.weather_code]||['cloudy','Nublado']; c.temp=Math.round(o.current.temperature_2m*10)/10; c.cond=w[0]; c.texto=w[1];
+          c.dias=o.daily.time.map((f,k)=>({f,max:o.daily.temperature_2m_max[k],min:o.daily.temperature_2m_min[k],lluvia:o.daily.precipitation_probability_max[k]}));
+        }); okW=true;
+      }
+    }catch(e){}
+    if(okU||okW){
+      document.getElementById('live').textContent=JSON.stringify(L);
+      if(window.drawLive) window.drawLive();
+      const u=document.getElementById('lv-upd');
+      if(u) u.innerHTML+=` <span class="mini">En vivo desde tu navegador a las <b>${new Date().toLocaleTimeString('es-PA',{timeZone:'America/Panama',hour:'numeric',minute:'2-digit'})}</b>: ${[okU?'sismos (USGS)':'',okW?'clima':''].filter(Boolean).join(' y ')}.</span>`;
+    }
+  }
+  refresh(); setInterval(refresh,300000);
 })();
+
 
 const IC={
  phone:'<path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/>',
