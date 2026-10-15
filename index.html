@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3C%3Fxml version=%221.0%22 encoding=%22UTF-8%22%3F%3E%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 xmlns:xlink=%22http://www.w3.org/1999/xlink%22 width=%22450%22 height=%22300%22 viewBox=%220 0 36 24%22%3E%3Crect width=%2236%22 height=%2224%22 fill=%22%23fff%22/%3E%3Cg fill=%22%23005293%22%3E%3Cg id=%22star%22 transform=%22translate(9,6)%22%3E%3Cg id=%22c%22%3E%3Cpath id=%22t%22 d=%22M 0,-3 v 3 h 1.5 z%22 transform=%22rotate(18 0,-3)%22/%3E%3Cuse xlink:href=%22%23t%22 transform=%22scale(-1,1)%22/%3E%3C/g%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(72)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(144)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(216)%22/%3E%3Cuse xlink:href=%22%23c%22 transform=%22rotate(288)%22/%3E%3C/g%3E%3Crect y=%2212%22 width=%2218%22 height=%2212%22/%3E%3C/g%3E%3Cg fill=%22%23d21034%22%3E%3Crect x=%2218%22 width=%2218%22 height=%2212%22/%3E%3Cuse xlink:href=%22%23star%22 x=%2218%22 y=%2212%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap">
-<script>(function(){try{var t=localStorage.getItem('tp-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}})();</script>
+<script>(function(){var t=null;try{t=localStorage.getItem('tp-theme')}catch(e){}if(t!=='light')document.documentElement.setAttribute('data-theme','dark')})();</script>
 <style>
 /* Layout: columna única tipo story extendida — kicker azul, título light + bloque rojo, tarjetas blancas con filo azul, skyline al pie */
 :root{
@@ -760,7 +760,7 @@ drawLive();
   b.addEventListener('click',function(){
     var d=root.getAttribute('data-theme')==='dark';
     if(d) root.removeAttribute('data-theme'); else root.setAttribute('data-theme','dark');
-    try{ if(d) localStorage.removeItem('tp-theme'); else localStorage.setItem('tp-theme','dark'); }catch(e){}
+    try{ localStorage.setItem('tp-theme', d?'light':'dark'); }catch(e){}
     sync();
   });
   sync();
