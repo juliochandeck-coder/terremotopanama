@@ -599,9 +599,9 @@ details.cgroup[open]>summary{margin-bottom:12px}
 
   <div class="wrap">
     <div class="kpis">
-      <div class="kpi"><b>11,527</b><span>personas afectadas</span></div>
-      <div class="kpi"><b>3,390</b><span>viviendas afectadas</span></div>
-      <div class="kpi"><b>2,841</b><span>personas en albergues</span></div>
+      <div class="kpi"><b>13,623</b><span>personas afectadas</span></div>
+      <div class="kpi"><b>4,045</b><span>familias afectadas</span></div>
+      <div class="kpi"><b>3,696</b><span>personas en albergues</span></div>
       <div class="kpi"><b>27</b><span>heridos</span></div>
     </div>
 
@@ -619,18 +619,18 @@ details.cgroup[open]>summary{margin-bottom:12px}
 
     <details class="more">
       <summary>Ver todas las cifras del balance<svg class="chev" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></summary>
-      <p class="intro">Comunicado Oficial N.º 11 de SINAPROC y el COEN, con corte a las 7:00 p.m. del 13 de octubre, más datos del MINSA, MEDUCA y la CSS. Las cifras cambian a medida que avanzan las inspecciones.</p>
+      <p class="intro">Comunicado Oficial N.º 12 de SINAPROC y el COE Nacional, difundido el 14 de octubre (no informa la hora de corte), más datos del MINSA, MEDUCA y la CSS. Las cifras cambian a medida que avanzan las inspecciones.</p>
       <div class="mgrid">
-        <div><b>3,667</b><span>familias afectadas</span></div>
-        <div><b>727</b><span>viviendas con pérdida total</span></div>
-        <div><b>33</b><span>albergues temporales</span></div>
+        <div><b>4,045</b><span>familias afectadas</span></div>
+        <div><b>879</b><span>familias con pérdida total de la vivienda</span></div>
+        <div><b>45</b><span>albergues temporales</span></div>
         <div><b>0</b><span>desaparecidos</span></div>
         <div><b>28</b><span>evacuaciones aéreas médicas</span></div>
         <div><b>619</b><span>escuelas en evaluación (35 colapsadas)</span></div>
         <div><b>66</b><span>instalaciones de salud con daños</span></div>
         <div><b>90</b><span>edificios del Gobierno afectados</span></div>
-        <div><b>42</b><span>embarazadas entre los afectados</span></div>
-        <div><b>452</b><span>personas con discapacidad afectadas</span></div>
+        <div><b>50</b><span>embarazadas entre los afectados</span></div>
+        <div><b>547</b><span>personas con discapacidad afectadas</span></div>
         <div><b>6,000+</b><span>pacientes atendidos por el MINSA</span></div>
         <div><b>331 t</b><span>de agua potable enviadas</span></div>
       </div>
@@ -1022,12 +1022,12 @@ renderA();
 
 /* ---- Mapa interactivo ---- */
 const R={
- 'Los Santos':{v:1613,h:6,a:'644',al:'12 albergues en Tonosí',e:71,n:['Vía Pedasí–Tonosí inhabilitada','727 viviendas con pérdida total entre Los Santos y Herrera']},
- 'Coclé':{v:1052,h:17,a:'—',al:'3 albergues activos',e:12,n:['Colapsaron la Catedral, la Gobernación y un hotel en Penonomé','Hospital Aquilino Tejeira pide donaciones']},
- 'Veraguas':{v:614,h:null,a:'2,044',al:'16 albergues en Mariato',e:38,n:['Cortes de luz, agua e internet','9 puentes dañados en Soná','Estación de bomberos colapsada en Soná']},
- 'Herrera':{v:498,h:null,a:'—',al:'',e:51,n:['Epicentro cerca de Pitaloza Arriba, Los Pozos','32 deslizamientos y 11 comunidades aisladas','727 viviendas con pérdida total entre Herrera y Los Santos']},
- 'Colón':{v:14,h:null,a:'257',al:'Polideportivo de Barrio Norte',e:4,n:['14 viviendas unifamiliares y 29 caserones afectados en la ciudad de Colón','Daños parciales en 3 hospitales']},
- 'Chiriquí':{v:49,h:null,a:'17',al:'El Naranjo, Remedios',e:80,n:['10 viviendas con daño total (11 oct.)','Hospital Oriente Chiricano evacuado','Inspecciones en curso']},
+ 'Los Santos':{v:2010,h:6,a:'644',al:'12 albergues en Tonosí',e:71,n:['Vía Pedasí–Tonosí inhabilitada','35 escuelas, 28 edificios del Gobierno y 4 hospitales con daños']},
+ 'Coclé':{v:1324,h:17,a:'—',al:'3 albergues activos',e:12,n:['Colapsaron la Catedral, la Gobernación y un hotel en Penonomé','Hospital Aquilino Tejeira pide donaciones']},
+ 'Veraguas':{v:637,h:null,a:'2,569',al:'16 albergues en Mariato',e:38,n:['Cortes de luz, agua e internet','9 puentes dañados en Soná','Estación de bomberos colapsada en Soná']},
+ 'Herrera':{v:984,h:null,a:'—',al:'',e:51,n:['Epicentro cerca de Pitaloza Arriba, Los Pozos','32 deslizamientos y 11 comunidades aisladas','153 viviendas destruidas y 831 con daños moderados, parciales o leves']},
+ 'Colón':{v:14,h:null,a:'220',al:'Polideportivo de Barrio Norte',e:4,n:['14 viviendas unifamiliares y 29 caserones afectados en la ciudad de Colón','Daños parciales en 3 hospitales']},
+ 'Chiriquí':{v:123,h:null,a:'17',al:'El Naranjo, Remedios',e:80,n:['33 de las 123 viviendas con daño total','Hospital Oriente Chiricano evacuado','Inspecciones en curso']},
  'Panamá Oeste':{v:21,h:2,a:'—',al:'',e:11,n:['IPT Capira y escuela Pedro Pablo Sánchez requieren atención especial']},
  'Panamá':{v:4,h:null,a:'—',al:'Refugio en Parque Omar',e:null,vl:'4 edificios',n:['Daños menores en 4 edificios residenciales','Potabilizadora de Chilibre al 20 % el día del sismo']},
  'Bocas del Toro':{v:8,h:null,a:'—',al:'',e:14,n:['28 personas afectadas','14 escuelas con daños']},
